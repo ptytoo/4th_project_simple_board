@@ -1,0 +1,7 @@
+<h1>회원 정보</h1>
+<% @users.each do |user| %>
+<div class="alert alert-info" role="alert">
+<p>이메일 : <%= user.email %></p>
+<p>비밀번호 : <%= user.password %></p>
+</div>
+<% end %>
