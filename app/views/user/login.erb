@@ -1,6 +1,11 @@
 <h1>로그인</h1>
-<form action = 'login_process'>
+<form action = 'login_process' method='post'>
     아이디 : <input type ='text' name = 'email'><br>
     비밀번호 : <input type = 'password' name = 'password'>
+    <input type = "hidden" name = "authenticity_token" value = "<%= form_authenticity_token() %>">
     <input type = 'submit' value = '로그인'>
 </form>
+
+<%= form_tag do %>
+  Form contents
+<% end %>

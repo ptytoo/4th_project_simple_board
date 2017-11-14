@@ -9,13 +9,10 @@ class UserController < ApplicationController
 
     
     def create
-        @email = params[:email]
-        @password = params[:password]
         User.create(
-            email: @email,
-            password: @password
+            email: params[:email],
+            password: params[:password]
         )
-        
         redirect_to '/'
     end
     
@@ -25,17 +22,22 @@ class UserController < ApplicationController
     def login
     end
     
+    #1. 디비에 유저가 없을 때
+    #2. 유저는 있는데 비번을 틀렸을 때
     def login_process
-        if User.exists?(email: params[:email]) 
             user = User.find_by(email: params[:email])
+        if user
             if user.password == params[:password]
                 session[:user_email] = user.email
                 flash[:notice] = "로그인 성공!"
                 redirect_to '/'
             else
-                flash[:notice] = "로그인 실패!"
+                flash[:notice] = "비밀번호가 다릅니다."
                 redirect_to '/user/login'
             end
+        else
+            flash[:notice] = "존재하지 않는 아이디입니다."
+            redirect_to '/user/new'
         end
         
     end

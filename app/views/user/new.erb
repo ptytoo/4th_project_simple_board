@@ -1,6 +1,7 @@
 <h1>회원가입</h1>
-<form action = 'create'>
+<form action = 'create' method='post'>
     아이디 : <input type ='text' name = 'email'><br>
-    비밀번호 : <input type = 'password' name = 'password'>
+    비밀번호 : <input type = 'password' name = 'password'><br>
+    <input type = "hidden" name = "authenticity_token" value = "<%= form_authenticity_token() %>">
     <input type = 'submit' value = '회원가입'>
 </form>
