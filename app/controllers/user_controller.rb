@@ -32,11 +32,11 @@ class UserController < ApplicationController
                 flash[:notice] = "로그인 성공!"
                 redirect_to '/'
             else
-                flash[:notice] = "비밀번호가 다릅니다."
+                flash[:alert] = "비밀번호가 다릅니다."
                 redirect_to '/user/login'
             end
         else
-            flash[:notice] = "존재하지 않는 아이디입니다."
+            flash[:alert] = "존재하지 않는 아이디입니다."
             redirect_to '/user/new'
         end
         
@@ -46,5 +46,8 @@ class UserController < ApplicationController
         session.clear
         flash[:notice] = "로그아웃 되었습니다."
         redirect_to '/'
+    end
+    
+    def note
     end
 end

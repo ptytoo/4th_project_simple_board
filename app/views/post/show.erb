@@ -6,15 +6,13 @@
 </div>
 <!-- 댓글 form -->
 <h3>댓글</h3>
-<%= form_tag('/post/create_comment') do %>
+<%= form_tag("/post/create_comment/#{@post.id}") do %>
   <%= text_field_tag(:comment)%>
   <%= submit_tag('등록')%>
 <%end%>
 
 <% @comments.each do |comment|%>
-<%= form_tag do%>
-  <%= comment.content%>
-<%end%>
+    <%= comment.content%><br>
 <%end%>
 
 <a href='/post/modify/<%= @post.id%>'>수정</a>

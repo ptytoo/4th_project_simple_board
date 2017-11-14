@@ -1,16 +1,49 @@
 <h1>게시판</h1>
 
-<% @posts.each do |post|%>
+<% @posts.each_with_index do |post, index|%>
 <div class="alert alert-info" role="alert">
-<%= post.id%>번째 글 : <%= post.title %>
-<a href='/post/show/<%=post.id%>'>보기</a>
+<span class="badge badge-info"><%= post.id%>번째 글</span>
+<%= post.title %>
+  <p>
+  <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample<%=index%>" aria-expanded="false" aria-controls="collapseExample">
+    간편보기
+  </button>
+    </p>
+    <div class="collapse" id="collapseExample<%=index%>">
+      <div class="card card-body">
+        <%= post.content%>
+      </div>
+    </div>
+<button type="button" class="btn btn-light"><a href='/post/show/<%=post.id%>'>보기</a></button>
 </div>
 <% end %> 
 
-<a href='/post/new'>새로운 글 작성</a><br>
+<a href='/post/new'><div class="text-right"><button type="button" class="btn btn-primary">새로운 글 작성</button></div></a>
+     
 <!--
 <a href='user/index'>회원 정보 확인</a>
 <a href='/user/login'>로그인</a>
 <a href='/user/new'>회원가입</a>
 <a href='/user/logout'>로그아웃</a><br>
 -->
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>번호</th>
+      <th>제목</th>
+      <th>글쓴이</th>
+      <th>작성일</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @posts.each do |post|%>
+        <tr>
+          <th scope="row"><%= post.id%></th>
+          <td><%=post.title%></a></td>
+          <td><%=post.user.email%></td>
+          <td><%= time_ago_in_words(post.created_at)%></td>
+        </tr>
+    <%end%>
+  </tbody>
+</table>

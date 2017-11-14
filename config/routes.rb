@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :blogs
+  resources :tweets
   get '/' => 'post#index'
   
   get '/user/index'
@@ -9,11 +11,13 @@ Rails.application.routes.draw do
   post '/user/login_process'
   get '/user/logout'
   
+  get '/user/note'
+  
   get '/post/new'
   post '/post/create'
   get '/post/show/:id' => 'post#show'
   get '/post/modify/:id' => 'post#modify'
   get '/post/update/:id' => 'post#update'
   get '/post/destroy/:id' => 'post#destroy'
-  get '/post/create_comment'
+  post '/post/create_comment/:post_id' => 'post#create_comment'
 end
